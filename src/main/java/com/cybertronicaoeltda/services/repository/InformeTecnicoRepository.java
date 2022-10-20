@@ -12,9 +12,11 @@ import java.util.Optional;
 public interface InformeTecnicoRepository extends JpaRepository<InformeTecnico, Integer> {
 
     // Sencillos
-    Optional<InformeTecnico> findByEquipoSN(String equipoSN);
+//    Optional<InformeTecnico> findByEquipoSN(String equipoSN);
 
     // Listas
+    List<InformeTecnico> findAllByEquipoSN(String equipoSN);
+    List<InformeTecnico> findAllByDireccionIP(String direccionIP);
     List<InformeTecnico> findAllByCliente(String cliente);
     List<InformeTecnico> findAllByDependencia(String dependencia);
     List<InformeTecnico> findAllByEquipoMarca(String equipoMarca);

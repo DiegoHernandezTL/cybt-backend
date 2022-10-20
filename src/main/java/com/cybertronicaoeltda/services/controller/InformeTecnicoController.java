@@ -1,5 +1,6 @@
 package com.cybertronicaoeltda.services.controller;
 
+import com.cybertronicaoeltda.services.dto.FirmaDto;
 import com.cybertronicaoeltda.services.dto.InformeTecnicoDto;
 import com.cybertronicaoeltda.services.dto.Mensaje;
 import com.cybertronicaoeltda.services.entity.InformeTecnico;
@@ -14,7 +15,10 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/inftecnico")
-@CrossOrigin(origins = "http://localhost:4200/")
+@CrossOrigin(origins= "http://localhost:4200")
+//@CrossOrigin(origins= "http://localhost:4200", allowedHeaders = {
+//        "Content-type",
+//},maxAge = 4800, allowCredentials = "false", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS, RequestMethod.DELETE})
 public class InformeTecnicoController {
 
     @Autowired
@@ -107,6 +111,28 @@ public class InformeTecnicoController {
             return new ResponseEntity(list, HttpStatus.OK);
     }
 
+    @GetMapping("/list/sn/{equipoSN}")
+    public ResponseEntity<List<InformeTecnico>> listEquipoSN(
+            @PathVariable("equipoSN") String equipoSN
+    ) {
+        List<InformeTecnico> list = informeTecnicoService.findAllByEquipoSN(equipoSN);
+        if(list.toArray().length < 1)
+            return new ResponseEntity(new Mensaje("No hay informes."), HttpStatus.NOT_FOUND);
+        else
+            return new ResponseEntity(list, HttpStatus.OK);
+    }
+
+    @GetMapping("/list/ip/{direccionIP}")
+    public ResponseEntity<List<InformeTecnico>> listDireccionIP(
+            @PathVariable("direccionIP") String direccionIP
+    ) {
+        List<InformeTecnico> list = informeTecnicoService.findAllByDireccionIP(direccionIP);
+        if(list.toArray().length < 1)
+            return new ResponseEntity(new Mensaje("No hay informes."), HttpStatus.NOT_FOUND);
+        else
+            return new ResponseEntity(list, HttpStatus.OK);
+    }
+
     // Obteción de resultados únicos
 
     @GetMapping("/find/id/{id}")
@@ -115,16 +141,6 @@ public class InformeTecnicoController {
     ) {
         if(informeTecnicoService.existsById(id))
             return new ResponseEntity(informeTecnicoService.findById(id).get(), HttpStatus.OK);
-        else
-            return new ResponseEntity(new Mensaje("No existe."), HttpStatus.NOT_FOUND);
-    }
-
-    @GetMapping("/find/sn/{equipoSN}")
-    public ResponseEntity<InformeTecnico> findByEquipoSN(
-            @PathVariable("equipoSN") String equipoSN
-    ) {
-        if(informeTecnicoService.existsByEquipoSN(equipoSN))
-            return new ResponseEntity(informeTecnicoService.findByEquipoSN(equipoSN).get(), HttpStatus.OK);
         else
             return new ResponseEntity(new Mensaje("No existe."), HttpStatus.NOT_FOUND);
     }
@@ -192,6 +208,21 @@ public class InformeTecnicoController {
                 return new ResponseEntity(new Mensaje("Informe no existe."), HttpStatus.NOT_FOUND);
             case 3:
                 return new ResponseEntity(new Mensaje("Serial de equipo duplicado."), HttpStatus.BAD_REQUEST);
+            default:
+                return new ResponseEntity(new Mensaje("Algo ha fallado, intente nuevamente."), HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @PutMapping("/sign/{id}")
+    public ResponseEntity<?> sign(
+            @PathVariable("id") int id,
+            @RequestBody FirmaDto firmaDto
+            ) throws ParseException {
+        switch (informeTecnicoService.sign(id, firmaDto)) {
+            case 0 :
+                return new ResponseEntity(new Mensaje("Creado con éxito."), HttpStatus.CREATED);
+            case 1:
+                return new ResponseEntity(new Mensaje("Informe no existe."), HttpStatus.NOT_FOUND);
             default:
                 return new ResponseEntity(new Mensaje("Algo ha fallado, intente nuevamente."), HttpStatus.BAD_REQUEST);
         }

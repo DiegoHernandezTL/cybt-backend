@@ -1,5 +1,6 @@
 package com.cybertronicaoeltda.services.service;
 
+import com.cybertronicaoeltda.services.dto.FirmaDto;
 import com.cybertronicaoeltda.services.dto.InformeTecnicoDto;
 import com.cybertronicaoeltda.services.entity.InformeTecnico;
 import com.cybertronicaoeltda.services.repository.InformeTecnicoRepository;
@@ -25,8 +26,16 @@ public class InformeTecnicoService {
         return informeTecnicoRepository.findById(id);
     }
 
-    public Optional<InformeTecnico> findByEquipoSN(String equipoSN) {
-        return informeTecnicoRepository.findByEquipoSN(equipoSN);
+//    public Optional<InformeTecnico> findByEquipoSN(String equipoSN) {
+//        return informeTecnicoRepository.findByEquipoSN(equipoSN);
+//    }
+
+    public List<InformeTecnico> findAllByDireccionIP(String direccionIP) {
+        return informeTecnicoRepository.findAllByDireccionIP(direccionIP);
+    }
+
+    public List<InformeTecnico> findAllByEquipoSN(String equipoSN) {
+        return informeTecnicoRepository.findAllByEquipoSN(equipoSN);
     }
 
     public List<InformeTecnico> list() {
@@ -103,18 +112,22 @@ public class InformeTecnicoService {
         try {
             /**
              * Formatear fecha
-             * Formato de entrada: "31/12/1998 13:37:50"
-             * Formato de entrada: "dd/MM/yyyy HH:mm:ss"
+             * Formato de entrada: "1998-12-31T13:37"
+             * Formato de entrada: "yyyy-MM-dd'T'hh:mm"
              */
 
-            SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+            SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'HH:mm");
             if (!Objects.equals(informeTecnicoDto.getFechaRetiro(), "")) {
                 System.out.println("El valor de date es");
                 System.out.print(informeTecnicoDto.getFechaRetiro());
-                Date parsedFechaRetiro = dateFormat.parse(informeTecnicoDto.getFechaRetiro());
+                Date parsedFechaRetiro = (Date)dateFormat.parse(informeTecnicoDto.getFechaRetiro());
                 Timestamp timestampFechaRetiro = new Timestamp(parsedFechaRetiro.getTime());
-
-                System.out.println(informeTecnicoDto.getFirmaRecibe());
+                Timestamp timestampFechaRecibe = null;
+                if (!Objects.equals(informeTecnicoDto.getFechaRecibe(), "")) {
+                    Date parsedFechaRecibe = dateFormat.parse(informeTecnicoDto.getFechaRecibe());
+                    timestampFechaRecibe = new Timestamp(parsedFechaRecibe.getTime());
+                }
+                System.out.println(informeTecnicoDto.getFechaRecibe());
 
                 InformeTecnico informeTecnico = new InformeTecnico(
                         informeTecnicoDto.getCliente(),
@@ -122,6 +135,7 @@ public class InformeTecnicoService {
                         informeTecnicoDto.getUsuario(),
                         informeTecnicoDto.getDependencia(),
                         timestampFechaRetiro,
+                        timestampFechaRecibe,
                         informeTecnicoDto.getEquipoTipo(),
                         informeTecnicoDto.getEquipoNombre(),
                         informeTecnicoDto.getEquipoMarca(),
@@ -138,16 +152,15 @@ public class InformeTecnicoService {
                         informeTecnicoDto.getRecibe(),
                         informeTecnicoDto.getFirmaRecibe(),
                         informeTecnicoDto.getServicioDetalle(),
-                        informeTecnicoDto.getObservaciones()
+                        informeTecnicoDto.getObservaciones(),
+                        informeTecnicoDto.getContadorHojas(),
+                        informeTecnicoDto.getDireccionIP(),
+                        informeTecnicoDto.getRecibeCargo(),
+                        informeTecnicoDto.getUsuarioCargo()
                 );
 
 
 
-//                if (!Objects.equals(informeTecnicoDto.getFechaRecibe(), "")) {
-//                    Date parsedFechaRecibe = dateFormat.parse(informeTecnicoDto.getFechaRecibe());
-//                    Timestamp timestampFechaRecibe = new Timestamp(parsedFechaRecibe.getTime());
-//                    informeTecnico.setFechaRecibe(timestampFechaRecibe);
-//                }
 
                 informeTecnicoRepository.save(informeTecnico);
                 if (informeTecnicoRepository.existsById(informeTecnico.getId())) {
@@ -178,11 +191,11 @@ public class InformeTecnicoService {
 //                }
                 /**
                  * Formatear fecha
-                 * Formato de entrada: "31/12/1998 13:37:50"
-                 * Formato de entrada: "dd/MM/yyyy HH:mm:ss"
+                 * Formato de entrada: "1998-12-31T13:37"
+                 * Formato de entrada: "yyyy-MM-dd'T'hh:mm"
                  */
 
-                SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss");
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd'T'hh:mm");
                 Date parsedFechaRetiro = dateFormat.parse(informeTecnicoDto.getFechaRetiro());
                 Timestamp timestampFechaRetiro = new java.sql.Timestamp(parsedFechaRetiro.getTime());
                 Date parsedFechaRecibe = dateFormat.parse(informeTecnicoDto.getFechaRecibe());
@@ -213,6 +226,10 @@ public class InformeTecnicoService {
                 informeTecnico.setFirmaRecibe(informeTecnicoDto.getFirmaRecibe());
                 informeTecnico.setServicioDetalle(informeTecnicoDto.getServicioDetalle());
                 informeTecnico.setObservaciones(informeTecnicoDto.getObservaciones());
+                informeTecnico.setContadorHojas(informeTecnico.getContadorHojas());
+                informeTecnico.setDireccionIP(informeTecnico.getDireccionIP());
+                informeTecnico.setRecibeCargo(informeTecnico.getRecibeCargo());
+                informeTecnico.setUsuarioCargo(informeTecnicoDto.getUsuarioCargo());
                 informeTecnicoRepository.save(informeTecnico);
                 return 0;
             } else
@@ -220,6 +237,22 @@ public class InformeTecnicoService {
 //        } catch (Exception e) {
 //            return 1; // fallo no definido
 //        }
+    }
+
+    public int sign(int id, FirmaDto firmaDto) {
+        try {
+            if (informeTecnicoRepository.existsById(id)) {
+                InformeTecnico informe = informeTecnicoRepository.findById(id).get();
+                informe.setFirmaRecibe(firmaDto.getFirma());
+                informeTecnicoRepository.save(informe);
+                return 0;
+            } else {
+                return 1;
+            }
+        } catch (Exception e) {
+            System.out.println("Error al firmar : "+e);
+            return 2;
+        }
     }
 
     // Verificación

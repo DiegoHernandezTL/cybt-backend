@@ -23,6 +23,7 @@ public class InformeTecnico {
     private int tipo;
     @NotBlank
     private String usuario;
+    private String usuarioCargo;
     @NotBlank
     private String dependencia;
     private Date fechaRetiro;
@@ -34,6 +35,8 @@ public class InformeTecnico {
     private String equipoNombre;
     private String equipoMarca;
     private String equipoSN;
+    private int contadorHojas;
+    private String direccionIP;
     private String monitorNombre;
     private String monitorMarca;
     private String monitorSN;
@@ -45,6 +48,7 @@ public class InformeTecnico {
     private String mouseSN;
     //      Datos de recepción
     private String recibe;
+    private String recibeCargo;
     @Column(columnDefinition="TEXT", length = 50000)
     private String firmaRecibe;
     private String servicioDetalle;
@@ -62,12 +66,13 @@ public class InformeTecnico {
         this.equipoTipo = equipoTipo;
     }
 
-    public InformeTecnico(String cliente, int tipo, String usuario, String dependencia, Date fechaRetiro, String equipoTipo,String equipoNombre, String equipoMarca, String equipoSN, String monitorNombre, String monitorMarca, String monitorSN, String tecladoNombre, String tecladoMarca, String tecladoSN, String mouseNombre, String mouseMarca, String mouseSN, String recibe, String firmaRecibe, String servicioDetalle, String observaciones) {
+    public InformeTecnico(String cliente, int tipo, String usuario, String dependencia, Date fechaRetiro, Date fechaRecibe,String equipoTipo,String equipoNombre, String equipoMarca, String equipoSN, String monitorNombre, String monitorMarca, String monitorSN, String tecladoNombre, String tecladoMarca, String tecladoSN, String mouseNombre, String mouseMarca, String mouseSN, String recibe, String firmaRecibe, String servicioDetalle, String observaciones, int contadorHojas, String direccionIP, String recibeCargo, String usuarioCargo) {
         this.cliente = cliente;
         this.tipo = tipo;
         this.usuario = usuario;
         this.dependencia = dependencia;
         this.fechaRetiro = fechaRetiro;
+        this.fechaRecibe = fechaRecibe;
         this.equipoTipo = equipoTipo;
         this.equipoNombre = equipoNombre;
         this.equipoMarca = equipoMarca;
@@ -85,6 +90,10 @@ public class InformeTecnico {
         this.firmaRecibe = firmaRecibe;
         this.servicioDetalle = servicioDetalle;
         this.observaciones = observaciones;
+        this.usuarioCargo = usuarioCargo;
+        this.recibeCargo = recibeCargo;
+        this.contadorHojas = contadorHojas;
+        this.direccionIP = direccionIP;
     }
 
     public int getId() {
@@ -277,5 +286,37 @@ public class InformeTecnico {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public String getUsuarioCargo() {
+        return usuarioCargo;
+    }
+
+    public void setUsuarioCargo(String usuarioCargo) {
+        this.usuarioCargo = usuarioCargo;
+    }
+
+    public int getContadorHojas() {
+        return contadorHojas;
+    }
+
+    public void setContadorHojas(int contadorHojas) {
+        this.contadorHojas = contadorHojas;
+    }
+
+    public String getDireccionIP() {
+        return direccionIP;
+    }
+
+    public void setDireccionIP(String direccionIP) {
+        this.direccionIP = direccionIP;
+    }
+
+    public String getRecibeCargo() {
+        return recibeCargo;
+    }
+
+    public void setRecibeCargo(String recibeCargo) {
+        this.recibeCargo = recibeCargo;
     }
 }

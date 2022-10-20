@@ -1,0 +1,16 @@
+##create user
+
+POST http://localhost:8080/user/create
+Content-Type: application/json
+
+{
+  "sub": "106292737424820829826",
+  "correo": "diego35andres199@gmail.com",
+  "nombre": "CaruBardd",
+  "apellido": "Hernandez",
+  "area": "Desarrollo",
+  "cargo": "Desarrollador",
+  "telefono": 3125898092,
+  "rol": "Invitado",
+  "estado": "Activo"
+}

@@ -13,6 +13,7 @@ public class InformeTecnicoDto {
     private int tipo;
     @NotBlank
     private String usuario;
+    private String usuarioCargo;
     @NotBlank
     private String dependencia;
 //    @NotBlank
@@ -24,6 +25,8 @@ public class InformeTecnicoDto {
     private String equipoNombre;
     private String equipoMarca;
     private String equipoSN;
+    private int contadorHojas;
+    private String direccionIP;
     private String monitorNombre;
     private String monitorMarca;
     private String monitorSN;
@@ -35,6 +38,7 @@ public class InformeTecnicoDto {
     private String mouseSN;
     //      Datos de recepción
     private String recibe;
+    private String recibeCargo;
     private String firmaRecibe;
     private String servicioDetalle;
     private String observaciones;
@@ -51,7 +55,7 @@ public class InformeTecnicoDto {
         this.equipoTipo = equipoTipo;
     }
 
-    public InformeTecnicoDto(String cliente, int tipo, String usuario, String dependencia, String fechaRetiro, String fechaRecibe, String equipoTipo,String equipoNombre, String equipoMarca, String equipoSN, String monitorNombre, String monitorMarca, String monitorSN, String tecladoNombre, String tecladoMarca, String tecladoSN, String mouseNombre, String mouseMarca, String mouseSN, String recibe, String firmaRecibe, String servicioDetalle, String observaciones) {
+    public InformeTecnicoDto(String cliente, int tipo, String usuario, String dependencia, String fechaRetiro, String fechaRecibe, String equipoTipo,String equipoNombre, String equipoMarca, String equipoSN, String monitorNombre, String monitorMarca, String monitorSN, String tecladoNombre, String tecladoMarca, String tecladoSN, String mouseNombre, String mouseMarca, String mouseSN, String recibe, String firmaRecibe, String servicioDetalle, String observaciones, int contadorHojas, String direccionIP, String recibeCargo, String usuarioCargo) {
         this.cliente = cliente;
         this.tipo = tipo;
         this.usuario = usuario;
@@ -75,6 +79,10 @@ public class InformeTecnicoDto {
         this.firmaRecibe = firmaRecibe;
         this.servicioDetalle = servicioDetalle;
         this.observaciones = observaciones;
+        this.contadorHojas = contadorHojas;
+        this.direccionIP = direccionIP;
+        this.recibeCargo = recibeCargo;
+        this.usuarioCargo = usuarioCargo;
     }
 
     public String getCliente() {
@@ -259,5 +267,37 @@ public class InformeTecnicoDto {
 
     public void setObservaciones(String observaciones) {
         this.observaciones = observaciones;
+    }
+
+    public String getUsuarioCargo() {
+        return usuarioCargo;
+    }
+
+    public void setUsuarioCargo(String usuarioCargo) {
+        this.usuarioCargo = usuarioCargo;
+    }
+
+    public int getContadorHojas() {
+        return contadorHojas;
+    }
+
+    public void setContadorHojas(int contadorHojas) {
+        this.contadorHojas = contadorHojas;
+    }
+
+    public String getDireccionIP() {
+        return direccionIP;
+    }
+
+    public void setDireccionIP(String direccionIP) {
+        this.direccionIP = direccionIP;
+    }
+
+    public String getRecibeCargo() {
+        return recibeCargo;
+    }
+
+    public void setRecibeCargo(String recibeCargo) {
+        this.recibeCargo = recibeCargo;
     }
 }
