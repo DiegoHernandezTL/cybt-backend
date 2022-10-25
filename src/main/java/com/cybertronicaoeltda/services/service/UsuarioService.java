@@ -29,12 +29,12 @@ public class UsuarioService {
     // Búsquedas grupales
 
     public List<Usuario> findAll() { return usuarioRepository.findAll(); }
-    public List<Usuario> findAllByNombre(String nombre) { return usuarioRepository.findAllByNombre(nombre.toLowerCase()); }
-    public List<Usuario> findAllByApellido(String apellido){ return usuarioRepository.findAllByApellido(apellido.toLowerCase()); }
-    public List<Usuario> findAllByArea(String area){ return usuarioRepository.findAllByArea(area.toLowerCase()); }
-    public List<Usuario> findAllByCargo(String cargo){ return usuarioRepository.findAllByCargo(cargo.toLowerCase()); }
-    public List<Usuario> findAllByRol(String rol){ return usuarioRepository.findAllByRol(rol.toLowerCase()); }
-    public List<Usuario> findAllByEstado(String estado){ return usuarioRepository.findAllByEstado(estado.toLowerCase()); }
+    public List<Usuario> findAllByNombre(String nombre) { return usuarioRepository.findAllByNombre(nombre.charAt(0) + nombre.substring(1)); }
+    public List<Usuario> findAllByApellido(String apellido){ return usuarioRepository.findAllByApellido(apellido.charAt(0) + apellido.substring(1)); }
+    public List<Usuario> findAllByArea(String area){ return usuarioRepository.findAllByArea(area.charAt(0) + area.substring(1)); }
+    public List<Usuario> findAllByCargo(String cargo){ return usuarioRepository.findAllByCargo(cargo.charAt(0) + cargo.substring(1)); }
+    public List<Usuario> findAllByRol(String rol){ return usuarioRepository.findAllByRol(rol.charAt(0) + rol.substring(1)); }
+    public List<Usuario> findAllByEstado(String estado){ return usuarioRepository.findAllByEstado(estado.charAt(0) + estado.substring(1)); }
 
 
     // Existencia de individuales
@@ -101,13 +101,13 @@ public class UsuarioService {
             Usuario nuevoUsuario = new Usuario(
                     usuarioDto.getSub(),
                     usuarioDto.getCorreo().toLowerCase(),
-                    usuarioDto.getNombre().toLowerCase(),
-                    usuarioDto.getApellido().toLowerCase(),
-                    usuarioDto.getArea().toLowerCase(),
-                    usuarioDto.getCargo().toLowerCase(),
+                    usuarioDto.getNombre().charAt(0) + usuarioDto.getNombre().substring(1),
+                    usuarioDto.getApellido().charAt(0) + usuarioDto.getApellido().substring(1),
+                    usuarioDto.getArea().charAt(0) + usuarioDto.getArea().substring(1),
+                    usuarioDto.getCargo().charAt(0) + usuarioDto.getCargo().substring(1),
                     Long.parseLong(usuarioDto.getTelefono()),
-                    usuarioDto.getRol().toLowerCase(),
-                    usuarioDto.getEstado().toLowerCase()
+                    usuarioDto.getRol().charAt(0) + usuarioDto.getRol().substring(1),
+                    usuarioDto.getEstado().charAt(0) + usuarioDto.getEstado().substring(1)
             );
             usuarioRepository.save(nuevoUsuario);
             if (usuarioRepository.existsByCorreo(nuevoUsuario.getCorreo())) {
@@ -136,14 +136,14 @@ public class UsuarioService {
                 }
 
                 usuarioBase.setSub(usuarioDto.getSub());
-                usuarioBase.setNombre(usuarioDto.getNombre().toLowerCase());
-                usuarioBase.setApellido(usuarioDto.getApellido().toLowerCase());
+                usuarioBase.setNombre(usuarioDto.getNombre().charAt(0) + usuarioDto.getNombre().substring(1));
+                usuarioBase.setApellido(usuarioDto.getApellido().charAt(0) + usuarioDto.getApellido().substring(1));
                 usuarioBase.setCorreo(usuarioDto.getCorreo().toLowerCase());
-                usuarioBase.setArea(usuarioDto.getArea().toLowerCase());
-                usuarioBase.setCargo(usuarioDto.getCargo().toLowerCase());
+                usuarioBase.setArea(usuarioDto.getArea().charAt(0) + usuarioDto.getArea().substring(1));
+                usuarioBase.setCargo(usuarioDto.getCargo().charAt(0) + usuarioDto.getCargo().substring(1));
                 usuarioBase.setTelefono(Long.parseLong(usuarioDto.getTelefono()));
-                usuarioBase.setRol(usuarioDto.getRol().toLowerCase());
-                usuarioBase.setEstado(usuarioDto.getEstado().toLowerCase());
+                usuarioBase.setRol(usuarioDto.getRol().charAt(0) + usuarioDto.getRol().substring(1));
+                usuarioBase.setEstado(usuarioDto.getEstado().charAt(0) + usuarioDto.getEstado().substring(1));
 
                 usuarioRepository.save(usuarioBase);
                 return 0;
