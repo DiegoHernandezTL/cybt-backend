@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/user")
-@CrossOrigin(origins = "http://10.147.17.75:4200/")
+@CrossOrigin(origins = "http://localhost:4200/")
 //@CrossOrigin(origins= "http://localhost:4200", allowedHeaders = {
 //        "Content-type",
 //},maxAge = 4800, allowCredentials = "false", methods = {RequestMethod.GET, RequestMethod.POST, RequestMethod.OPTIONS, RequestMethod.DELETE, RequestMethod.PUT})
