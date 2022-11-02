@@ -39,6 +39,8 @@ public class InformeTecnico {
     private String equipoSN;
     private String officeVersion;
     private String officeKEY;
+    private String windowsVersion;
+    private String windowsKEY;
     private int contadorHojas;
     private String direccionIP;
     private String monitorNombre;
@@ -70,7 +72,40 @@ public class InformeTecnico {
         this.equipoTipo = equipoTipo;
     }
 
-    public InformeTecnico(String cliente, String responsable, int tipo, String usuario, String dependencia, Date fechaRetiro, Date fechaRecibe,String equipoTipo,String equipoNombre, String equipoMarca, String equipoSN, String officeVersion, String officeKEY, String monitorNombre, String monitorMarca, String monitorSN, String tecladoNombre, String tecladoMarca, String tecladoSN, String mouseNombre, String mouseMarca, String mouseSN, String recibe, String firmaRecibe, String servicioDetalle, String observaciones, int contadorHojas, String direccionIP, String recibeCargo, String usuarioCargo) {
+    public InformeTecnico(
+            String cliente,
+            String responsable,
+            int tipo,
+            String usuario,
+            String dependencia,
+            Date fechaRetiro,
+            Date fechaRecibe,
+            String equipoTipo,
+            String equipoNombre,
+            String equipoMarca,
+            String equipoSN,
+            String officeVersion,
+            String officeKEY,
+            String windowsVersion,
+            String windowsKEY,
+            String monitorNombre,
+            String monitorMarca,
+            String monitorSN,
+            String tecladoNombre,
+            String tecladoMarca,
+            String tecladoSN,
+            String mouseNombre,
+            String mouseMarca,
+            String mouseSN,
+            String recibe,
+            String firmaRecibe,
+            String servicioDetalle,
+            String observaciones,
+            int contadorHojas,
+            String direccionIP,
+            String recibeCargo,
+            String usuarioCargo
+    ) {
         this.cliente = cliente;
         this.responsable = responsable;
         this.tipo = tipo;
@@ -84,6 +119,8 @@ public class InformeTecnico {
         this.equipoSN = equipoSN;
         this.officeVersion = officeVersion;
         this.officeKEY = officeKEY;
+        this.windowsVersion = windowsVersion;
+        this.windowsKEY = windowsKEY;
         this.monitorNombre = monitorNombre;
         this.monitorMarca = monitorMarca;
         this.monitorSN = monitorSN;
@@ -209,6 +246,22 @@ public class InformeTecnico {
 
     public void setOfficeKEY(String officeKEY) {
         this.officeKEY = officeKEY;
+    }
+
+    public String getWindowsVersion() {
+        return windowsVersion;
+    }
+
+    public void setWindowsVersion(String windowsVersion) {
+        this.windowsVersion = windowsVersion;
+    }
+
+    public String getWindowsKEY() {
+        return windowsKEY;
+    }
+
+    public void setWindowsKEY(String windowsKEY) {
+        this.windowsKEY = windowsKEY;
     }
 
     public String getMonitorNombre() {
