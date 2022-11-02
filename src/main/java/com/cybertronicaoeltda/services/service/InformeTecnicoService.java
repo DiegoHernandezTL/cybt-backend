@@ -141,6 +141,8 @@ public class InformeTecnicoService {
                         informeTecnicoDto.getEquipoNombre(),
                         informeTecnicoDto.getEquipoMarca(),
                         informeTecnicoDto.getEquipoSN(),
+                        informeTecnicoDto.getOfficeVersion(),
+                        informeTecnicoDto.getOfficeKEY(),
                         informeTecnicoDto.getMonitorNombre(),
                         informeTecnicoDto.getMonitorMarca(),
                         informeTecnicoDto.getMonitorSN(),
@@ -215,6 +217,8 @@ public class InformeTecnicoService {
                 informeTecnico.setEquipoNombre(informeTecnicoDto.getEquipoNombre());
                 informeTecnico.setEquipoMarca(informeTecnicoDto.getEquipoMarca());
                 informeTecnico.setEquipoSN(informeTecnicoDto.getEquipoSN());
+                informeTecnico.setOfficeVersion(informeTecnico.getOfficeVersion());
+                informeTecnico.setOfficeKEY(informeTecnicoDto.getOfficeKEY());
                 informeTecnico.setMonitorNombre(informeTecnicoDto.getMonitorNombre());
                 informeTecnico.setMonitorMarca(informeTecnicoDto.getMonitorMarca());
                 informeTecnico.setMonitorSN(informeTecnicoDto.getMonitorSN());
