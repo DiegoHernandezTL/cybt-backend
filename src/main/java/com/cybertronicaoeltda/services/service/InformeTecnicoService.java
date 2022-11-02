@@ -131,6 +131,7 @@ public class InformeTecnicoService {
 
                 InformeTecnico informeTecnico = new InformeTecnico(
                         informeTecnicoDto.getCliente(),
+                        informeTecnicoDto.getResponsable(),
                         informeTecnicoDto.getTipo(),
                         informeTecnicoDto.getUsuario(),
                         informeTecnicoDto.getDependencia(),
@@ -140,6 +141,10 @@ public class InformeTecnicoService {
                         informeTecnicoDto.getEquipoNombre(),
                         informeTecnicoDto.getEquipoMarca(),
                         informeTecnicoDto.getEquipoSN(),
+                        informeTecnicoDto.getOfficeVersion(),
+                        informeTecnicoDto.getOfficeKEY(),
+                        informeTecnicoDto.getWindowsVersion(),
+                        informeTecnicoDto.getWindowsKEY(),
                         informeTecnicoDto.getMonitorNombre(),
                         informeTecnicoDto.getMonitorMarca(),
                         informeTecnicoDto.getMonitorSN(),
@@ -204,6 +209,7 @@ public class InformeTecnicoService {
                 InformeTecnico informeTecnico = informeTecnicoRepository.findById(id).get();
 
                 informeTecnico.setCliente(informeTecnicoDto.getCliente());
+                informeTecnico.setResponsable(informeTecnico.getResponsable());
                 informeTecnico.setTipo(informeTecnicoDto.getTipo());
                 informeTecnico.setUsuario(informeTecnicoDto.getUsuario());
                 informeTecnico.setDependencia(informeTecnicoDto.getDependencia());
@@ -213,6 +219,10 @@ public class InformeTecnicoService {
                 informeTecnico.setEquipoNombre(informeTecnicoDto.getEquipoNombre());
                 informeTecnico.setEquipoMarca(informeTecnicoDto.getEquipoMarca());
                 informeTecnico.setEquipoSN(informeTecnicoDto.getEquipoSN());
+                informeTecnico.setOfficeVersion(informeTecnicoDto.getOfficeVersion());
+                informeTecnico.setOfficeKEY(informeTecnicoDto.getOfficeKEY());
+                informeTecnico.setWindowsVersion(informeTecnicoDto.getWindowsVersion());
+                informeTecnico.setWindowsKEY(informeTecnicoDto.getWindowsKEY());
                 informeTecnico.setMonitorNombre(informeTecnicoDto.getMonitorNombre());
                 informeTecnico.setMonitorMarca(informeTecnicoDto.getMonitorMarca());
                 informeTecnico.setMonitorSN(informeTecnicoDto.getMonitorSN());
@@ -226,9 +236,9 @@ public class InformeTecnicoService {
                 informeTecnico.setFirmaRecibe(informeTecnicoDto.getFirmaRecibe());
                 informeTecnico.setServicioDetalle(informeTecnicoDto.getServicioDetalle());
                 informeTecnico.setObservaciones(informeTecnicoDto.getObservaciones());
-                informeTecnico.setContadorHojas(informeTecnico.getContadorHojas());
-                informeTecnico.setDireccionIP(informeTecnico.getDireccionIP());
-                informeTecnico.setRecibeCargo(informeTecnico.getRecibeCargo());
+                informeTecnico.setContadorHojas(informeTecnicoDto.getContadorHojas());
+                informeTecnico.setDireccionIP(informeTecnicoDto.getDireccionIP());
+                informeTecnico.setRecibeCargo(informeTecnicoDto.getRecibeCargo());
                 informeTecnico.setUsuarioCargo(informeTecnicoDto.getUsuarioCargo());
                 informeTecnicoRepository.save(informeTecnico);
                 return 0;
