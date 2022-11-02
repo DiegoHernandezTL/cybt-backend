@@ -8,6 +8,8 @@ public class InformeTecnicoDto {
 
     @NotBlank
     private String cliente;
+    @NotBlank
+    private String responsable;
     @Min(1)
     @Max(3)
     private int tipo;
@@ -55,8 +57,9 @@ public class InformeTecnicoDto {
         this.equipoTipo = equipoTipo;
     }
 
-    public InformeTecnicoDto(String cliente, int tipo, String usuario, String dependencia, String fechaRetiro, String fechaRecibe, String equipoTipo,String equipoNombre, String equipoMarca, String equipoSN, String monitorNombre, String monitorMarca, String monitorSN, String tecladoNombre, String tecladoMarca, String tecladoSN, String mouseNombre, String mouseMarca, String mouseSN, String recibe, String firmaRecibe, String servicioDetalle, String observaciones, int contadorHojas, String direccionIP, String recibeCargo, String usuarioCargo) {
+    public InformeTecnicoDto(String cliente, String responsable,int tipo, String usuario, String dependencia, String fechaRetiro, String fechaRecibe, String equipoTipo,String equipoNombre, String equipoMarca, String equipoSN, String monitorNombre, String monitorMarca, String monitorSN, String tecladoNombre, String tecladoMarca, String tecladoSN, String mouseNombre, String mouseMarca, String mouseSN, String recibe, String firmaRecibe, String servicioDetalle, String observaciones, int contadorHojas, String direccionIP, String recibeCargo, String usuarioCargo) {
         this.cliente = cliente;
+        this.responsable = responsable;
         this.tipo = tipo;
         this.usuario = usuario;
         this.dependencia = dependencia;
@@ -92,6 +95,10 @@ public class InformeTecnicoDto {
     public void setCliente(String cliente) {
         this.cliente = cliente;
     }
+
+    public String getResponsable() { return responsable; }
+
+    public void setResponsable(String responsable) { this.responsable = responsable; }
 
     public int getTipo() {
         return tipo;

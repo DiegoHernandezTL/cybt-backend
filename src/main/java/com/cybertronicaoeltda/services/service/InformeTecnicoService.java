@@ -131,6 +131,7 @@ public class InformeTecnicoService {
 
                 InformeTecnico informeTecnico = new InformeTecnico(
                         informeTecnicoDto.getCliente(),
+                        informeTecnicoDto.getResponsable(),
                         informeTecnicoDto.getTipo(),
                         informeTecnicoDto.getUsuario(),
                         informeTecnicoDto.getDependencia(),
@@ -204,6 +205,7 @@ public class InformeTecnicoService {
                 InformeTecnico informeTecnico = informeTecnicoRepository.findById(id).get();
 
                 informeTecnico.setCliente(informeTecnicoDto.getCliente());
+                informeTecnico.setResponsable(informeTecnico.getResponsable());
                 informeTecnico.setTipo(informeTecnicoDto.getTipo());
                 informeTecnico.setUsuario(informeTecnicoDto.getUsuario());
                 informeTecnico.setDependencia(informeTecnicoDto.getDependencia());

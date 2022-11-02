@@ -18,6 +18,8 @@ public class InformeTecnico {
     private int id;
     @NotBlank
     private String cliente;
+    @NotBlank
+    private String responsable;     // Únicamente puede recibir [Oscar Espitia / Oscar Riveros]
     @Min(1)
     @Max(3)
     private int tipo;
@@ -66,8 +68,9 @@ public class InformeTecnico {
         this.equipoTipo = equipoTipo;
     }
 
-    public InformeTecnico(String cliente, int tipo, String usuario, String dependencia, Date fechaRetiro, Date fechaRecibe,String equipoTipo,String equipoNombre, String equipoMarca, String equipoSN, String monitorNombre, String monitorMarca, String monitorSN, String tecladoNombre, String tecladoMarca, String tecladoSN, String mouseNombre, String mouseMarca, String mouseSN, String recibe, String firmaRecibe, String servicioDetalle, String observaciones, int contadorHojas, String direccionIP, String recibeCargo, String usuarioCargo) {
+    public InformeTecnico(String cliente, String responsable, int tipo, String usuario, String dependencia, Date fechaRetiro, Date fechaRecibe,String equipoTipo,String equipoNombre, String equipoMarca, String equipoSN, String monitorNombre, String monitorMarca, String monitorSN, String tecladoNombre, String tecladoMarca, String tecladoSN, String mouseNombre, String mouseMarca, String mouseSN, String recibe, String firmaRecibe, String servicioDetalle, String observaciones, int contadorHojas, String direccionIP, String recibeCargo, String usuarioCargo) {
         this.cliente = cliente;
+        this.responsable = responsable;
         this.tipo = tipo;
         this.usuario = usuario;
         this.dependencia = dependencia;
@@ -111,6 +114,10 @@ public class InformeTecnico {
     public void setCliente(String cliente) {
         this.cliente = cliente;
     }
+
+    public String getResponsable() { return responsable; }
+
+    public void setResponsable(String responsable) { this.responsable = responsable; }
 
     public int getTipo() {
         return tipo;
